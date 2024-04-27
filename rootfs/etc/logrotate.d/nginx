@@ -1,0 +1,27 @@
+/data/logs/*_access.log /data/logs/*/access.log {
+    su nginx-unraid nginx-unraid
+    create 0644
+    weekly
+    rotate 4
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+    /bin/kill -USR1 `cat /run/nginx.pid 2>/dev/null` 2>/dev/null || true
+    endscript
+}
+
+/data/logs/*_error.log /data/logs/*/error.log {
+    su nginx-unraid nginx-unraid
+    create 0644
+    weekly
+    rotate 10
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+    /bin/kill -USR1 `cat /run/nginx.pid 2>/dev/null` 2>/dev/null || true
+    endscript
+}

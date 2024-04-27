@@ -1,0 +1,9 @@
+#!/command/with-contenv sh
+# shellcheck shell=sh
+
+set -e
+
+. /usr/bin/common.sh
+
+log_info 'Starting nginx ...'
+exec s6-setuidgid "$PUID:$PGID" nginx

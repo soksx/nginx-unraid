@@ -1,0 +1,19 @@
+#!/command/with-contenv sh
+# shellcheck shell=sh
+
+set -e
+
+. /usr/bin/common.sh
+
+log_info 'Starting configuration watcher...'
+
+while true; do
+    inotifywait -q -e modify -e move -e create -e delete "/data/nginx/default_host" "/data/nginx/proxy_host" |
+        while read -r directory action file; do
+            if [[ "$file" =~ .*conf$ ]]; then # Does the file end with .xml?
+                log_info 'Configuration file changed, reloading nginx...'
+                exec s6-setuidgid "$PUID:$PGID" nginx -s reload
+            fi
+        done
+    sleep 1
+done
