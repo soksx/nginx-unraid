@@ -9,8 +9,8 @@ RED='\033[1;31m'
 RESET='\033[0m'
 export CYAN BLUE YELLOW RED RESET
 
-PUID=${PUID:-1337}
-PGID=${PGID:-1337}
+PUID=${PUID:-0}
+PGID=${PGID:-0}
 
 # If changing the username and group name below,
 # ensure all references to this user is also changed.
@@ -21,7 +21,7 @@ NGINXGROUP=nginx-unraid
 NGINXHOME=/tmp/nginx-unraid
 export NGINXUSER NGINXGROUP NGINXHOME
 
-if [[ "$PUID" -ne '1337' ]] && [ "$PGID" = '1337' ]; then
+if [[ "$PUID" -ne '0' ]] && [ "$PGID" = '0' ]; then
 	# set group id to same as user id,
 	# the user probably forgot to specify the group id and
 	# it would be rediculous to intentionally use the root group
