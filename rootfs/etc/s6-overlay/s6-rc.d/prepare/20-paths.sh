@@ -13,7 +13,6 @@ fi
 # Create required folders
 mkdir -p \
 	/data/nginx \
-	/data/custom_ssl \
 	/data/logs \
 	/data/access \
 	/data/nginx/default_host \

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 jobs:
   build_and_push:
@@ -29,7 +30,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/nginx-unraid:latest
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/nginx-unraid:${{ github.ref == 'refs/heads/main' && 'latest' || format('{0}-{1}', github.ref_name, github.run_number) }}
 
       - name: Logout from Docker
         if: always()
