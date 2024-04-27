@@ -12,8 +12,6 @@ RUN echo "fs.file-max = 65535" > /etc/sysctl.conf \
     && apk update \
     && apk add --no-cache jq logrotate curl inotify-tools \
     && rm -rf /var/cache/apk/*
-# Init crond
-RUN 	
 # s6 overlay
 COPY scripts/install-s6 /tmp/install-s6
 RUN chmod +x /tmp/install-s6 && /tmp/install-s6 "${TARGETPLATFORM}" && rm -f /tmp/install-s6
