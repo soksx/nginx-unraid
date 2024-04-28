@@ -20,6 +20,9 @@ COPY scripts/logrotate.sh /tmp/logrotate.sh
 RUN chmod +x /tmp/logrotate.sh
 # Remove docker entrypoint
 RUN rm -Rf /docker-*
+# Remove conflict user and group (guest:users) 
+RUN deluser --remove-home guest \
+	&& delgroup users
 # Copy all configuration files
 COPY rootfs /
 # Grant logrotate config permissions
