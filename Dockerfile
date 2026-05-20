@@ -1,4 +1,5 @@
-FROM nginx:alpine-slim
+ARG NGINX_BASE_TAG=alpine-slim
+FROM nginx:${NGINX_BASE_TAG}
 ARG TARGETPLATFORM
 # Set env vars
 ENV SUPPRESS_NO_CONFIG_WARNING=1 \
